@@ -1,66 +1,54 @@
-import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { useState } from "react";
+import Chart from "react-apexcharts";
 import { topRentalCars } from "../assets/data/topRentalCars";
 
-const DounutChart = () => {
-  ChartJS.register(ArcElement, Tooltip, Legend);
+import "../styles/dounut-chart.css";
 
-  const chartData = {
+const DounutChart = () => {
+  const [options, setOptions] = useState({
+    chart: {
+      width: "100%",
+      hight: "auto",
+      type: "donut",
+    },
     labels: topRentalCars.map((tr) => {
       return tr.type;
     }),
-    datasets: [
+    dataLabels: {
+      enabled: false,
+    },
+    fill: {
+      colors: ["#0D3559", "#175D9C", "#2185DE", "#63A9E8", "#A6CEF2"],
+    },
+    colors: ["#0D3559", "#175D9C", "#2185DE", "#63A9E8", "#A6CEF2"],
+    legend: {
+      formatter: function (label, opts) {
+        return label + "-" + opts.w.globals.series[opts.seriesIndex];
+      },
+      horizontalAlign: "left",
+    },
+    responsive: [
       {
-        label: "Rental car",
-        data: topRentalCars.map((tr) => {
-          return tr.rentalTime;
-        }),
-        backgroundColor: [
-          "#0d3559",
-          "#175D9C",
-          "#2185DE",
-          "#63A9E8",
-          "#A6CEF2",
-        ],
-        borderColor: ["#0d3559", "#175D9C", "#2185DE", "#63A9E8", "#A6CEF2"],
-        borderWidth: 1,
+        breakpoint: 2000,
+        options: {
+          legend: {
+            position: "bottom",
+          },
+          chart: {
+            height: 400,
+          },
+        },
       },
     ],
-  };
+  });
 
-  const chartOptions = {};
-
-  const textCenter = {
-    id: "textCenter",
-    beforeDatasetsDraw(chart, arcs, pluginOptions) {
-      const { ctx } = chart;
-      const xCoor = chart.getDatasetMeta(0).data[0].x;
-      const yCoor = chart.getDatasetMeta(0).data[0].y;
-
-      ctx.save();
-      ctx.font = "bolder 30px";
-      ctx.fillStyle = "#596780";
-      ctx.textAlign = "center";
-      ctx.textBaseLine = "middle";
-      ctx.fillText("Rental car", xCoor, yCoor + 15);
-
-      ctx.font = "18px";
-      ctx.fillStyle = "#eee";
-      ctx.fillText("Rental car", xCoor, yCoor - 10);
-    },
-  };
-
-  return (
-    <div
-      style={{ width: "100%", height: "100%", margin: "auto", padding: "10px" }}
-    >
-      <Doughnut
-        data={chartData}
-        options={chartOptions}
-        plugins={[textCenter]}
-      />
-    </div>
+  const [series, setSeries] = useState(
+    topRentalCars.map((tr) => {
+      return tr.rentalTime;
+    })
   );
+
+  return <Chart options={options} series={series} type="donut" />;
 };
 
 export default DounutChart;

@@ -87,7 +87,7 @@ const DashboardAdmin = () => {
           </span>
         </div>
         {/* dounut chart */}
-        <div>
+        <div className="max-w-screen-lg mt-4">
           <DounutChart />
         </div>
       </div>
