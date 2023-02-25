@@ -1,15 +1,27 @@
-import { useState } from "react";
 import Chart from "react-apexcharts";
 import { topRentalCars } from "../assets/data/topRentalCars";
 
 import "../styles/dounut-chart.css";
 
 const DounutChart = () => {
-  const [options, setOptions] = useState({
+  const options = {
     chart: {
       width: "100%",
       hight: "auto",
       type: "donut",
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              showAlwayes: true,
+            },
+          },
+        },
+      },
     },
     labels: topRentalCars.map((tr) => {
       return tr.type;
@@ -40,13 +52,11 @@ const DounutChart = () => {
         },
       },
     ],
-  });
+  };
 
-  const [series, setSeries] = useState(
-    topRentalCars.map((tr) => {
-      return tr.rentalTime;
-    })
-  );
+  const series = topRentalCars.map((tr) => {
+    return tr.rentalTime;
+  });
 
   return <Chart options={options} series={series} type="donut" />;
 };
