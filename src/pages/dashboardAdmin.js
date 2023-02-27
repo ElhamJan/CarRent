@@ -3,6 +3,7 @@ import { cars } from "../assets/data/cars";
 import mobileMap from "../assets/images/mobileMap.jpg";
 import PickDropSelection from "../components/PickDropSelection";
 import DounutChart from "../components/DounutChart";
+import { Link } from "react-router-dom";
 
 const DashboardAdmin = () => {
   const [carsWithDate, setCarsWithDate] = useState([]);
@@ -59,7 +60,7 @@ const DashboardAdmin = () => {
       </div>
       <div className="rounded bg-white p-4 mt-5">
         <div className="flex justify-between items-center">
-          <p className="font-bold">Top 5 Car Rental</p>
+          <h2 className="font-bold">Top 5 Car Rental</h2>
           <span>
             <svg
               width="24"
@@ -89,6 +90,15 @@ const DashboardAdmin = () => {
         {/* dounut chart */}
         <div className="max-w-screen-lg mt-4">
           <DounutChart />
+        </div>
+      </div>
+      {/* recent transactions */}
+      <div className="rounded bg-white p-4 mt-5">
+        <div className="flex justify-between items-center">
+          <h2 className="font-bold">Recent Transaction</h2>
+          <Link to="#" className="text-links text-xs">
+            View All
+          </Link>
         </div>
       </div>
     </>

@@ -8,6 +8,7 @@ module.exports = {
         secondary: "#596780",
         borderColor: "#c3d4e9",
         bg: "#f6f7f9",
+        links: "#3563e9",
       },
       backgroundImage: {
         "banner-bg": "url('/src/assets/images/BG.png')",

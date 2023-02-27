@@ -17,7 +17,10 @@ const DounutChart = () => {
             show: true,
             total: {
               show: true,
+              label: "Rental car",
               showAlwayes: true,
+              fontSize: "14px",
+              color: "#ccc",
             },
           },
         },
